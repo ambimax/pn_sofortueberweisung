@@ -1,0 +1,11 @@
+<config>
+	<modules>
+		<Paymentnetwork_Pnsofortueberweisung>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Payment />
+			</depends>
+		</Paymentnetwork_Pnsofortueberweisung>
+	</modules>
+</config>

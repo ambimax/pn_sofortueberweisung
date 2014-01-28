@@ -1,0 +1,35 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Paymentnetwork
+ * @package	Paymentnetwork_Sofortueberweisung
+ * @copyright  Copyright (c) 2008 [m]zentrale GbR, 2010 Payment Network AG
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version	$Id: sofortlastschrift.phtml 3844 2012-04-18 07:37:02Z dehn $
+ */
+?>
+<?php if(Mage::getStoreConfig('payment/sofort/sofortlastschrift_active')):?>
+<a name="<?php echo $this->getMethodCode() ?>"></a>
+<?php $_code=$this->getMethodCode()?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+		<?php if($this->isDisplayText()):?>
+		<li>
+			<strong><?php echo $this->__('Your benefit:')?></strong>
+			<?php echo $this->__('Certified payment method, direct debit')?>
+		</li>	
+		<?php else:?>
+		<li><a href="#<?php echo $this->getMethodCode() ?>" title="Informationen zu Sofortlastschrift"><img src="<?php echo $this->__('https://images.sofort.com/de/sl/banner_300x100.png');?>" alt="Sofortlastschrift" title="Sofortlastschrift" /></a></li>
+		<?php endif;?>
+</ul>
+<?php endif;?>

@@ -1,0 +1,34 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Paymentnetwork
+ * @package	Paymentnetwork_Sofortueberweisung
+ * @copyright  Copyright (c) 2010 Payment Network AG
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version	$Id: sofortueberweisung.phtml 605 2011-01-31 17:04:43Z poser $
+ */
+?>
+<p><?php echo $this->getMethod()->getTitle() ?></p>
+<?php if($_info = $this->getInfo()):?>
+	<?php if($this->loadData()): ?>
+		<?php echo $this->__('Holder')?>: <?php echo $this->escapeHtml($this->getHolder()) ?><br />
+		<?php echo $this->__('Account number')?>: <?php echo $this->escapeHtml($this->getAccountNumber()) ?><br />
+		<?php echo $this->__('Bank code')?>: <?php echo $this->escapeHtml($this->getBankCode()) ?><br />
+		<?php echo $this->__('Reason')?>:<br />
+		<?php echo $this->escapeHtml($this->getReason1()) ?>
+		<?php echo $this->escapeHtml($this->getReason2()) ?>
+	<?php endif; ?>	
+<?php else: ?>
+
+<?php endif; ?>

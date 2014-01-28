@@ -1,0 +1,33 @@
+<div class="page-title">
+	<h1><?php echo $this->__('Your order has been received') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+<?php echo $this->__('Please pay to the following account')?>:<br /><br />
+
+<?php echo $this->__('Holder')?>: <?php echo $this->escapeHtml($this->getHolder()) ?><br />
+<?php echo $this->__('Account number')?>: <?php echo $this->escapeHtml($this->getAccountNumber()) ?><br />
+<?php echo $this->__('Bank code')?>: <?php echo $this->escapeHtml($this->getBankCode()) ?><br />
+<?php echo $this->__('BIC')?>: <?php echo $this->escapeHtml($this->getBic()) ?><br />
+<?php echo $this->__('IBAN')?>: <?php echo $this->escapeHtml($this->getIban()) ?><br />
+<?php echo $this->__('Amount')?>: <?php echo $this->escapeHtml($this->getAmount()) ?><br />
+<?php echo $this->__('Reason')?>: <br />
+<?php echo $this->escapeHtml($this->getReason1()) ?><br />
+<?php echo $this->escapeHtml($this->getReason2()) ?><br />
+<br><br>
+
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+	<p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>
+	<p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<?php endif;?>
+	<p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+	<p>
+		<?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+		<?php echo $this->getChildHtml() ?>
+	</p>
+<?php endif;?>
+<?php endif;?>

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Paymentnetwork
+ * @package	Paymentnetwork_Sofortueberweisung
+ * @copyright  Copyright (c) 2008 [m]zentrale GbR, 2010 Payment Network AG
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version	$Id: sofortrechnung.phtml 3844 2012-04-18 07:37:02Z dehn $
+ */
+?>
+<?php if(Mage::getStoreConfig('payment/sofort/sofortrechnung_active')):?>
+<a name="<?php echo $this->getMethodCode() ?>"></a>
+<?php $_code=$this->getMethodCode()?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+	<li>
+		<div class="input-box">
+			<input type="checkbox" title="<?php echo $this->__('Please confirm our privacy policy.')?>" class="required-entry input-checkbox" id="<?php echo $_code?>_confirmation" name="payment[sr_confirmation]" value="1"/>&nbsp;
+			<a onclick="javascript:window.open('http://documents.sofort.com/de/sr/privacy_de','Datenschutzhinweise','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=500');"><?php echo $this->__('Please confirm our privacy policy.')?></a> 
+		</div>
+	</li>
+</ul>
+<?php endif;?>

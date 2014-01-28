@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+ 
+<layout>
+    <pnsofortueberweisung_adminhtml_pnsofortueberweisung_index>
+        <reference name="content">
+            <block type="pnsofortueberweisung/adminhtml_pnsofortueberweisung" name="pnsofortueberweisung_grid" />
+        </reference>
+    </pnsofortueberweisung_adminhtml_pnsofortueberweisung_index>
+ 
+ 	<pnsofortueberweisung_adminhtml_pnsofortueberweisung_edit>
+        <reference name="content">
+             <block type="adminhtml/template" name="pnsofortueberweisung_edit" template="pnsofortueberweisung/edit.phtml"/>
+        </reference>
+    </pnsofortueberweisung_adminhtml_pnsofortueberweisung_edit>
+</layout>

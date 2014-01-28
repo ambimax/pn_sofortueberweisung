@@ -1,0 +1,54 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Paymentnetwork
+ * @package	Paymentnetwork_Sofortueberweisung
+ * @copyright  Copyright (c) 2012 initOS GmbH & Co. KG, 2012 Payment Network AG
+ * @author Markus Schneider <markus.schneider@initos.com>
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version	$Id: ideal.phtml 417 2011-01-31 17:04:43Z poser $
+ */
+?>
+<?php if(Mage::getStoreConfig('payment/sofort_ideal/active')):?>
+<a name="<?php echo $this->getMethodCode() ?>"></a>
+<?php $_code=$this->getMethodCode()?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+		<?php if(Mage::getStoreConfig('payment/sofort_ideal/ask_holder')):?>
+		<li>
+			<div class="input-box">
+				<label for="<?php echo $_code ?>_holder"><?php echo $this->__('Holder')?> <span class="required">*</span></label><br/>
+				<input type="text" title="<?php echo $this->__('Holder')?>" class="required-entry input-text" id="<?php echo $_code?>_holder" name="payment[ideal_holder]" value="<?php echo $this->escapeHtml($this->getAccountHolder()); ?>"/>
+			</div>
+		</li>
+		<li>
+			<div class="input-box">
+				<label for="<?php echo $_code ?>_account_number"><?php echo $this->__('Account number')?> <span class="required">*</span></label><br/>
+				<input type="text" title="<?php echo $this->__('Account number')?>" class="required-entry input-text" id="<?php echo $_code ?>_account_number" name="payment[ideal_account_number]" value="<?php echo $this->escapeHtml($this->getAccountNumber()); ?>"/>
+			</div>
+		</li>
+		<?php endif; ?>
+		<li>
+			<div class="input-box">
+				<label for="<?php echo $_code ?>_bank_code"><?php echo $this->__('Bank')?> <span class="required">*</span></label><br/>
+				<select name="payment[ideal_bank_code]" id="<?php echo $_code ?>_bank_code" class="required">
+                    <?php foreach($this->getBanks() as $bank):?>
+    					<option value="<?php echo $bank['code']; ?>" <?php if($bank['code'] == $this->getIdealBankCode()):?>selected="selected"<?php endif;?>>
+    					    <?php echo $bank['name']; ?>
+    					</option>
+    				<?php endforeach; ?>
+                </select>    
+			</div>
+		</li>
+</ul>
+<?php endif;?>

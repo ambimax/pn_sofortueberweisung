@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Paymentnetwork
+ * @package	Paymentnetwork_Sofortueberweisung
+ * @copyright  Copyright (c) 2008 [m]zentrale GbR, 2010 Payment Network AG
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version	$Id: config.xml 3850 2012-04-18 08:27:34Z dehn $
+ */
+-->
+
+<config>
+	<modules>
+		<Paymentnetwork_Pnsofortueberweisung>
+			<!-- declare module's version information for database updates -->
+			<version>2.1.1</version>
+		</Paymentnetwork_Pnsofortueberweisung>
+	</modules>
+
+	<frontend>
+		<routers>
+			<pnsofortueberweisung>
+				<use>standard</use>
+				<args>
+					<module>Paymentnetwork_Pnsofortueberweisung</module>
+					<frontName>pnsofortueberweisung</frontName>
+				</args>
+			</pnsofortueberweisung>
+			
+			<sofort>
+				<use>standard</use>
+				<args>
+					<module>Paymentnetwork_Pnsofortueberweisung</module>
+					<frontName>sofort</frontName>
+				</args>
+			</sofort>
+		</routers>
+		
+		<layout>
+			<updates>
+				<pnsofortueberweisung>
+					<file>pnsofortueberweisung.xml</file>
+				</pnsofortueberweisung>
+			</updates>
+		</layout>
+		
+		<translate>
+			<modules>
+				<Paymentnetwork_Pnsofortueberweisung>
+					<files>
+						<default>Paymentnetwork_Sofortueberweisung.csv</default>
+					</files>
+				</Paymentnetwork_Pnsofortueberweisung>
+			</modules>
+		</translate>
+		
+		<secure_url>
+			<pnsofortueberweisung_pnsofortueberweisung>/pnsofortueberweisung/pnsofortueberweisung/</pnsofortueberweisung_pnsofortueberweisung>
+		</secure_url>
+	</frontend>
+	
+	<admin>
+		<routers>
+			<pnsofortueberweisung>
+				<use>admin</use>
+				<args>
+					<module>Paymentnetwork_Pnsofortueberweisung</module>
+					<frontName>pnsofortueberweisung</frontName>
+				</args>
+			</pnsofortueberweisung>
+		</routers>
+	</admin>
+	
+	<adminhtml>
+		<layout>
+			<updates>
+				<pnsofortueberweisung>
+					<file>pnsofortueberweisung.xml</file>
+				</pnsofortueberweisung>
+			</updates>
+		</layout>
+		
+		<translate>
+			<modules>
+				<Paymentnetwork_Pnsofortueberweisung>
+					<files>
+						<default>Paymentnetwork_Sofortueberweisung.csv</default>
+					</files>
+				</Paymentnetwork_Pnsofortueberweisung>
+			</modules>
+		</translate>
+
+		<menu>
+			<sales>
+				<children>
+					<menuitem1 translate="title" module="pnsofortueberweisung">
+						<title>Orders with Rechnung by sofort</title>
+						<action>pnsofortueberweisung/adminhtml_pnsofortueberweisung/index</action>
+						<sort_order>15</sort_order>
+					</menuitem1>
+				</children>
+			</sales>
+		</menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <menu1 translate="title" module="pnsofortueberweisung">
+                            <title>Paymentnetwork Pnsofortueberweisung</title>
+                            <sort_order>60</sort_order>
+                            <children>
+                                <menuitem1>
+                                    <title>Menu item 1</title>
+                                </menuitem1>
+                            </children>
+                       </menu1>
+                   </children>
+               </admin>
+           </resources>
+        </acl>
+    </adminhtml> 
+	
+	<global>
+		<blocks>
+			<pnsofortueberweisung>
+				<class>Paymentnetwork_Pnsofortueberweisung_Block</class>
+			</pnsofortueberweisung>
+            <checkout>
+                <rewrite>
+                    <onepage_shipping>Paymentnetwork_Pnsofortueberweisung_Block_Onepage_Shipping</onepage_shipping>
+                    <onepage_billing>Paymentnetwork_Pnsofortueberweisung_Block_Onepage_Billing</onepage_billing>
+                </rewrite>
+            </checkout>
+        </blocks>
+		<helpers>
+			<pnsofortueberweisung>
+				<class>Paymentnetwork_Pnsofortueberweisung_Helper</class>
+			</pnsofortueberweisung>
+		</helpers>
+		
+		<params_pnso>
+			<types>
+				<backlink>
+					<param>backlink</param>
+					<value><![CDATA[pnsofortueberweisung/adminhtml_pnsofortueberweisung/saveConfig]]></value>
+				</backlink>
+				<debug>
+					<param>debug</param>
+					<value>0</value>
+				</debug>			
+				<input_hash>
+					<param>projectssetting_interface_input_hash_check_enabled</param>
+					<value>1</value>
+				</input_hash>
+				<projectssetting_project_password>
+					<param>projectssetting_project_password</param>
+					<value></value>
+				</projectssetting_project_password>
+				<project_notification_password>
+					<param>project_notification_password</param>
+					<value></value>
+				</project_notification_password>
+				<user_partner_id>
+					<param>user_partner_id</param>
+					<value>x</value>
+				</user_partner_id>
+				<project_shop_system_id>
+					<param>project_shop_system_id</param>
+					<value>121</value>
+				</project_shop_system_id>
+				<projectssetting_interface_success_link>
+					<param>projectssetting_interface_success_link</param>
+					<value><![CDATA[index.php/pnsofortueberweisung/pnsofortueberweisung/return/orderId/-USER_VARIABLE_0-/transId/-TRANSACTION-/var1/-USER_VARIABLE_1_MD5_PASS-]]></value>
+				</projectssetting_interface_success_link>
+				<projectssetting_interface_success_link_redirect>
+					<param>projectssetting_interface_success_link_redirect</param>
+					<value>1</value>
+				</projectssetting_interface_success_link_redirect>
+				<projectssetting_interface_cancel_link>
+					<param>projectssetting_interface_cancel_link</param>
+					<value><![CDATA[index.php/pnsofortueberweisung/pnsofortueberweisung/error/orderId/-USER_VARIABLE_0-]]></value>
+				</projectssetting_interface_cancel_link>
+				<projectssetting_interface_timeout_link>
+					<param>projectssetting_interface_timeout_link</param>
+					<value><![CDATA[index.php/pnsofortueberweisung/pnsofortueberweisung/error/orderId/-USER_VARIABLE_0-]]></value>
+				</projectssetting_interface_timeout_link>
+				<projectssetting_interface_timeout>
+					<param>projectssetting_interface_timeout</param>
+					<value>600</value>
+				</projectssetting_interface_timeout>
+				<projectssetting_locked_amount>
+					<param>projectssetting_locked_amount</param>
+					<value>1</value>
+				</projectssetting_locked_amount>
+				<projectssetting_locked_reason_1>
+					<param>projectssetting_locked_reason_1</param>
+					<value>1</value>
+				</projectssetting_locked_reason_1>
+				<projectsnotification_http_activated>
+					<param>projectsnotification_http_activated</param>
+					<value>1</value>
+				</projectsnotification_http_activated>
+				<projectsnotification_http_url>
+					<param>projectsnotification_http_url</param>
+					<value><![CDATA[index.php/pnsofortueberweisung/pnsofortueberweisung/returnhttp/orderId/-USER_VARIABLE_0-/transId/-TRANSACTION-/var1/-USER_VARIABLE_1_MD5_PASS-]]></value>
+				</projectsnotification_http_url>
+				<projectsnotification_http_method>
+					<param>projectsnotification_http_method</param>
+					<value>1</value>
+				</projectsnotification_http_method>
+				<project_hash_algorithm>
+					<param>project_hash_algorithm</param>
+					<value>sha1</value>
+				</project_hash_algorithm>
+				<projectsnotification_email_email>
+					<param>projectsnotification_email_email</param>
+					<value></value>
+				</projectsnotification_email_email>
+				<projectsnotification_email_activated>
+					<param>projectsnotification_email_activated</param>
+					<value>1</value>
+				</projectsnotification_email_activated>
+				<projectsnotification_email_language_id>
+					<param>projectsnotification_email_language_id</param>
+					<value>DE</value>
+				</projectsnotification_email_language_id>
+				<project_name>
+					<param>project_name</param>
+					<value>Magento</value>
+				</project_name>
+			</types>
+		</params_pnso>
+		
+		<params_logos>
+			<types>
+				<banner1>
+					<name>logo_125x40</name>
+					<size>125x40</size>
+					<displayText>1</displayText>
+				</banner1>
+			</types>
+		</params_logos>
+		
+		<models>
+			<pnsofortueberweisung>
+				<class>Paymentnetwork_Pnsofortueberweisung_Model</class>
+				<resourceModel>pnsofortueberweisung_mysql4</resourceModel>
+			</pnsofortueberweisung>
+			<sales>
+				<rewrite>
+					<convert_order>Paymentnetwork_Pnsofortueberweisung_Model_Convert_Order</convert_order>
+					<convert_quote>Paymentnetwork_Pnsofortueberweisung_Model_Convert_Quote</convert_quote>	 
+					<order_invoice_total_discount>Paymentnetwork_Pnsofortueberweisung_Model_Order_Invoice_Total_Discount</order_invoice_total_discount> 
+					<!--  <order_invoice>Paymentnetwork_Pnsofortueberweisung_Model_Order_Invoice</order_invoice> -->
+					<!--  <order>Paymentnetwork_Pnsofortueberweisung_Model_Order</order> -->
+					<!--  <order_pdf_invoice>Paymentnetwork_Pnsofortueberweisung_Model_Order_Pdf_Invoice</order_pdf_invoice>  -->
+					<service_quote>Paymentnetwork_Pnsofortueberweisung_Model_Service_Quote</service_quote>
+				</rewrite>
+			</sales>
+		</models>
+		
+		<events>
+			 <sales_order_invoice_pay>
+				 <observers>
+					 <pnsofortueberweisung>
+						 <type>singleton</type>
+						 <class>Paymentnetwork_Pnsofortueberweisung_Model_Observer</class>
+						 <method>sales_order_invoice_pay</method>
+					 </pnsofortueberweisung>
+				 </observers>
+			 </sales_order_invoice_pay>
+			 <sales_order_payment_cancel>
+			 	<observers>
+			 		<pnsofortueberweisung>
+			 			<type>singleton</type>
+			 			<class>Paymentnetwork_Pnsofortueberweisung_Model_Observer</class>
+			 			<method>sales_order_payment_cancel</method>
+			 		</pnsofortueberweisung>
+			 	</observers>
+			 </sales_order_payment_cancel>
+			 <sales_order_payment_refund>
+			 	<observers>
+			 		<pnsofortueberweisung>
+			 			<type>singleton</type>
+			 			<class>Paymentnetwork_Pnsofortueberweisung_Model_Observer</class>
+			 			<method>sales_order_payment_refund</method>
+			 		</pnsofortueberweisung>
+			 	</observers>
+			 </sales_order_payment_refund>
+		</events>
+		
+		<resources>
+		<!-- resource identifier -->
+			<pnsofortueberweisung_setup>
+			<!-- specify database connection for this resource -->
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</pnsofortueberweisung_setup>
+			<pnsofortueberweisung_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</pnsofortueberweisung_write>
+			<pnsofortueberweisung_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</pnsofortueberweisung_read>
+		</resources>	
+		<sales>
+		<order>
+			<states>
+				<sofort translate="label">
+					<label>sofort</label>
+					<statuses>
+						<pending_payment default="1"/>
+					</statuses>
+					<visible_on_front/>
+				</sofort>
+			</states>
+		</order>
+		</sales>
+	</global>
+	
+	<default>
+		<payment>
+			<pnsofortueberweisung>
+				<active>0</active>
+				<model>pnsofortueberweisung/pnsofortueberweisung</model>
+				<payment_action>authorize</payment_action>
+				<order_status>pending</order_status>
+				<title>Sofortueberweisung</title>
+				<allowspecific>0</allowspecific>
+				<url>https://www.sofortueberweisung.de/payment/start</url>
+				<customer></customer>
+				<project></project>
+				<project_pswd></project_pswd>
+				<notification_pswd></notification_pswd>
+				<check_input_yesno>1</check_input_yesno>
+				<createinvoice>0</createinvoice>
+				<createNew><![CDATA[<a href="%s">Zum automatischen Einrichten hier klicken.</a>]]></createNew>
+				<urlCreateNew><![CDATA[https://www.sofortueberweisung.de/payment/createNew/]]></urlCreateNew>
+				<netherlands>0</netherlands>
+			</pnsofortueberweisung>
+			<sofortrechnung>
+				<active>0</active>
+				<model>pnsofortueberweisung/sofortrechnung</model>
+				<payment_action>authorize</payment_action> 
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<title>Rechnung</title>
+			</sofortrechnung>
+			<sofortlastschrift>
+				<active>0</active>
+				<model>pnsofortueberweisung/sofortlastschrift</model>
+				<payment_action>authorize</payment_action> 
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<title>sofortlastschrift</title>
+			</sofortlastschrift>
+			<pnsofort>
+				<active>0</active>
+				<model>pnsofortueberweisung/pnsofort</model>
+				<payment_action>authorize</payment_action> 
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<title>Sofortueberweisung</title>
+				<customerprotection>0</customerprotection>
+				<logourl><![CDATA[https://images.sofort.com/]]></logourl>
+			</pnsofort>
+			<lastschriftsofort>
+				<active>0</active>
+				<model>pnsofortueberweisung/lastschriftsofort</model>
+				<payment_action>authorize</payment_action> 
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<title>Lastschrift</title>
+			</lastschriftsofort> 
+			<sofortvorkasse>
+				<active>0</active>
+				<model>pnsofortueberweisung/sofortvorkasse</model>
+				<payment_action>authorize</payment_action>
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<title>Vorkasse</title>
+			</sofortvorkasse>	
+			<sofort>
+				<active>0</active>
+				<model>pnsofortueberweisung/abstract</model>
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<logo>logo_155x50</logo>
+				<title>xxx</title>
+			</sofort>
+			<sofort_ideal>
+				<active>0</active>
+				<model>pnsofortueberweisung/ideal</model>
+				<payment_action>authorize</payment_action> 
+				<allowspecific>0</allowspecific>
+				<order_status>pending</order_status>
+				<title>iDeal</title>
+			</sofort_ideal> 
+		</payment>
+	</default> 
+</config>

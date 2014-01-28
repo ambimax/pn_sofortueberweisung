@@ -1,0 +1,110 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Paymentnetwork
+ * @package	Paymentnetwork_Pnsofortueberweisung
+ * @copyright  Copyright (c) 2012 initOS GmbH & Co. KG
+ * @license	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @version	$Id: edit.phtml 3844 2012-04-18 07:37:02Z dehn $
+ */
+
+$items = $invoice->getSofortrechnungItems();
+?>
+<div class="content-header">
+    <table cellspacing="0" class="grid-header">
+        <tr>
+            <td><h3><?php echo $this->__('Order # %s', $order->getId()); ?></h3></td>
+            <td class="a-right">
+            	<button type="button" class="scalable back" onclick="setLocation('<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/sales_order/view',array('order_id'=>$order->getId())); ?>')" style=""><span>Back</span></button>
+                <button onclick="editForm.submit()" class="scalable save" type="button"><span><?php echo Mage::helper('pnsofortueberweisung')->__('Update Invoice'); ?></span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="grid">
+    <form id="edit_form" name="edit_form" method="post" action="<?php echo $this->getUrl('*/*/post', array('order_id'=>$order->getId())); ?>">
+        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <!--<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('This fieldset name')?></h4>-->
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="data">
+                	<tr class="headings">
+                		<th>
+                			<?php echo $this->__('SKU'); ?>
+                		</th>
+                		<th>
+                			<?php echo $this->__('Product'); ?>
+                		</th>
+                		<th>
+                			<?php echo $this->__('Price'); ?>
+                		</th>
+                		<th colspan="2">
+                			<?php echo $this->__('Qty'); ?>
+                		</th>
+                		<th>
+                			<?php echo $this->__('Tax'); ?>
+                		</th>
+                		<th class="last">
+                			<?php echo $this->__('Row Total'); ?>
+                		</th>
+                	</tr>
+                <?php foreach($items['item'] as $line): ?>
+                	<tr>
+                		<td class="label">
+                			<?php echo $line['product_number']; ?>
+                		</td>
+                		<td class="label">
+                			<strong><?php echo $line['title']; ?></strong><br/>
+                			<p><?php echo $line['description']?></p>
+                		</td>
+                		<td class="label">
+                			<?php echo $line['unit_price']; ?> <?php echo $order->getOrderCurrencyCode(); ?>
+                		</td>
+                		<td class="label last">
+                			 <span style="display: inline-block; width: 20px; text-align: right;"><?php echo $line['quantity']; ?></span>
+                			 <span style="display: inline-block; width: 40px; text-align: right;"><?php echo $this->__('=&gt;'); ?></span>
+                		</td>
+                		<td class="input-ele">
+                		<?php if($line['unit_price'] > 0): ?>
+                			<input class="required-entry validate-zero-or-greater validate-digits" name="line[<?php echo $line['item_id']; ?>]" value="<?php echo $line['quantity']; ?>" />
+                		<?php else: ?>
+                			<input type="hidden" class="required-entry validate-zero-or-greater validate-digits" name="line[<?php echo $line['item_id']; ?>]" value="<?php echo $line['quantity']; ?>" />
+                			<?php echo $line['quantity']; ?>
+                		<?php endif; ?>	
+                		</td>
+                		
+                		<td class="label">
+                			<?php echo $line['tax']; ?> %
+                		</td>
+                		<td class="label last">
+                			<?php echo ($line['unit_price']*$line['quantity']); ?> <?php echo $order->getOrderCurrencyCode(); ?>
+                		</td>
+                	</tr>
+                <?php endforeach; ?>
+            </table>
+            <div class="grid np">
+            	<div class="entry-edit">
+                	<fieldset>
+                        <span class="field-row">
+                            <label for="comment"><?php echo Mage::helper('pnsofortueberweisung')->__('Comment'); ?> *</label>
+                            <textarea rows="3" cols="30" id="comment" name="comment" class="required-entry"></textarea>
+                        </span>
+                    </fieldset>
+            	</div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+</script>
