@@ -1,0 +1,7 @@
+{
+  "name": "ambimax/Phoenix_Moneybookers",
+  "type": "magento-module",
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}
