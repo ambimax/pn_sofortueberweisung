@@ -1,5 +1,5 @@
 {
-  "name": "ambimax/Phoenix_Moneybookers",
+  "name": "ambimax/pn_sofortueberweisung",
   "type": "magento-module",
   "require": {
     "magento-hackathon/magento-composer-installer": "*"
